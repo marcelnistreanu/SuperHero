@@ -1,21 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc;
 
-namespace SuperHeroAPI
+namespace SuperHeroAPI;
+
+public class ModelStateValidator
 {
-    public class ModelStateValidator
+    public static IActionResult ValidateModelState(ActionContext context)
     {
-        public static IActionResult ValidateModelState(ActionContext context)
-        {
-            (string fieldName, ModelStateEntry entry) = context.ModelState
-                .First(x => x.Value.Errors.Count > 0);
-            string errorSerialized = entry.Errors[1].ErrorMessage;
+        (string fieldName, ModelStateEntry entry) = context.ModelState
+            .First(x => x.Value.Errors.Count > 0);
+        string errorSerialized = entry.Errors[1].ErrorMessage;
 
-            Error error = Error.Deserialize(errorSerialized);
-            Envelope envelope = Envelope.Error(error, fieldName);
-            var result = new BadRequestObjectResult(envelope);
+        Error error = Error.Deserialize(errorSerialized);
+        Envelope envelope = Envelope.Error(error, fieldName);
+        var result = new BadRequestObjectResult(envelope);
 
-            return result;
-        }
+        return result;
     }
 }

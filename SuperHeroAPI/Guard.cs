@@ -1,14 +1,12 @@
-﻿namespace SuperHeroAPI
+﻿namespace SuperHeroAPI;
+
+public static class Guard
 {
-    public static class Guard
+    public static void Require(bool condition, string errorMessage)
     {
-        public static void Require(bool condition, string errorMessage)
+        if (!condition)
         {
-            if (!condition)
-            {
-                throw new ArgumentException(errorMessage);
-            }
+            throw new ArgumentException(errorMessage);
         }
     }
-
 }

@@ -1,4 +1,6 @@
-﻿namespace SuperHeroAPI;
+﻿using SuperHeroAPI.Utils;
+
+namespace SuperHeroAPI;
 
 public class Name : ValueObject
 {

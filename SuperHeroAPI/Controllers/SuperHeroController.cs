@@ -44,14 +44,14 @@ public class SuperHeroController : ControllerBase
         {
             return Ok(result);
         }
-        else if (result.Error.Code == "hero.name.is.taken")
+
+        if (result.Error.Code == "hero.name.is.taken")
         {
             return Conflict(result.Error.Message);
         }
-        else
-        {
-            return BadRequest(result);
-        }
+
+        return BadRequest(result);
+        
     }
 
     [HttpPut("{id}")]
@@ -62,14 +62,14 @@ public class SuperHeroController : ControllerBase
         {
             return Ok(result);
         }
-        else if (result.IsFailure && result.Error.Code == "hero.name.is.taken")
+
+        if (result.IsFailure && result.Error.Code == "hero.name.is.taken")
         {
             return Conflict(result);
         }
-        else
-        {
-            return NotFound(result);
-        }
+        
+        return NotFound(result);
+        
     }
 
     [HttpDelete("{id}")]

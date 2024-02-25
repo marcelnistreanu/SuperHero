@@ -1,7 +1,7 @@
 ﻿global using SuperHeroAPI.Models;
 global using SuperHeroAPI.Data;
 using SuperHeroAPI.Services.SuperHeroService;
-using SuperHeroAPI;
+using SuperHeroAPI.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -26,6 +26,13 @@ public class SuperHeroController : ControllerBase
         return NotFound(result);
     }
 
+    [HttpGet("/getHeroesNew")]
+    public ActionResult<List<Superhero>> getHeroesNew()
+    {
+        var result = _superHeroService.getHeroesNew();
+        return Ok(result);
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetSingleHero(int id)
     {

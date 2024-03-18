@@ -10,6 +10,19 @@ public static class Errors
         }
     }
 
+    public static class User
+    {
+        public static Error NotFound()
+        {
+            return new Error("record.not.found", "User not found");
+        }
+
+        public static Error WrongPassword()
+        {
+            return new Error("incorrect.password", "Incorrect password");
+        }
+    }
+
     public static class General
     {
         public static Error NotFound(string entityName, long id)

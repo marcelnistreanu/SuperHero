@@ -1,4 +1,5 @@
-﻿using SuperHeroAPI.Utils;
+﻿using Microsoft.AspNetCore.Mvc;
+using SuperHeroAPI.Utils;
 
 namespace SuperHeroAPI.Services.SuperHeroService;
 
@@ -46,6 +47,14 @@ public class SuperHeroService : ISuperHeroService
         if (heroes is null)
             return Result.Failure<List<Superhero>>(Errors.General.NotFound("Superheroes"));
         return Result.Ok(heroes);
+    }
+
+    public List<Superhero> getHeroesNew()
+    {
+        List<Superhero> heroes = _context.SuperHeroes.ToList();
+        if (heroes is null)
+            return null;
+        return heroes;
     }
 
     public async Task<Result<Superhero>> GetSingleHero(int id)

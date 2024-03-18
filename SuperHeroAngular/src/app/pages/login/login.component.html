@@ -1,0 +1,57 @@
+<div class="container" *ngIf="isSuccess">
+  <div class="forms">
+    <div class="form login">
+      <span class="title">Login</span>
+      <div *ngIf="showError" class="alert alert-danger" role="alert">
+        {{ errorMessage }}
+      </div>
+      <form #addForm="ngForm" (ngSubmit)="onSubmit()">
+        <div class="input-field">
+          <input type="text" ngModel [(ngModel)]="username" name="username" placeholder="Enter your username" required>
+          <i class="uil uil-user"></i>
+        </div>
+        <div class="input-field">
+          <input type="password" ngModel [(ngModel)]="password" name="password" class="password" placeholder="Enter your password" required>
+          <i class="uil uil-lock icon"></i>
+        </div>
+
+        <div class="checkbox-text">
+          <div class="checkbox-content">
+            <input type="checkbox" id="logCheck">
+            <label for="logCheck" class="text">Remember me</label>
+          </div>
+
+          <a href="#" class="text">Forgot password?</a>
+        </div>
+
+        <div class="input-field button">
+          <input type="submit" value="Login">
+        </div>
+      </form>
+
+      <div class="login-signup">
+        <span class="text">
+          Not a member?
+          <a href="/signup">Signup Now</a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="popup" id="success" *ngIf="!isSuccess">
+  <div class="popup-content">
+    <!-- <div class="imgbox">
+      <img src="../../../assets/images/checked.png" alt="" class="img">
+    </div> -->
+    <div class="title">
+      <h3>Your confirmation link was resent</h3>
+    </div>
+    <p class="para">We have sent an email with a confirmation link to your email address. In order to complete the sign-up process, please click the confirmation link.</p>
+    <form action="">
+      <!-- <a href="#" class="button-okay" id="s_button">OKAY</a> -->
+      <!-- <p class="para_2">You will be redirected to the login page</p> -->
+    </form>
+  </div>
+</div>
+

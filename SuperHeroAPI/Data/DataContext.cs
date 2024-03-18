@@ -16,4 +16,5 @@ public class DataContext : DbContext
     }
 
     public DbSet<Superhero> SuperHeroes { get; set; }
+    public DbSet<User> Users { get; set; }
 }

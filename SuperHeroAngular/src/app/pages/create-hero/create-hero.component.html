@@ -1,5 +1,5 @@
 <div class="user-info">
-  <h2 class="user-text">User Information</h2>
+  <h2 class="user-text">Super hero Information</h2>
   <form #f="ngForm" (ngSubmit)="f.valid && onSubmit()" novalidate>
     <div class="form-group">
       <label for="name">Super hero name:</label>
@@ -21,8 +21,13 @@
   </form>
 </div>
 
-<div class="user-info" style="padding-top: 5px;">
+<div *ngIf="submitted && isSuccessful" class="user-info" style="padding-top: 5px;">
   <div class="alert alert-success" role="alert">
-    Changes saved!
+    Super hero created!
+  </div>
+</div>
+<div *ngIf="submitted && !isSuccessful" class="user-info" style="padding-top: 5px;">
+  <div class="alert alert-danger" role="alert">
+    {{ errorMessage }}
   </div>
 </div>

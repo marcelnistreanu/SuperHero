@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SuperHero } from '../../models/SuperHero';
-import { SuperHeroService } from '../../super-hero.service';
+import { SuperHeroService } from '../../services/super-hero.service';
 
 @Component({
   selector: 'app-create-hero',
@@ -13,10 +13,12 @@ export class CreateHeroComponent {
 
   isSuccessful = false;
   errorMessage = '';
+  submitted = false;
 
   constructor(public superheroService: SuperHeroService) { }
 
   onSubmit(): void {
+    this.submitted = true;
     this.superheroService.createSuperHero(this.superHero).subscribe(
       (response: any) => {
         console.log(response);
@@ -26,7 +28,7 @@ export class CreateHeroComponent {
         if (error.error && error.error.errorMessage) {
           this.errorMessage = error.error.errorMessage + " for field " + error.error.invalidField;
         } else {
-          this.errorMessage = "A apărut o eroare necunoscută.";
+          this.errorMessage = "Unknown error";
         }
         console.error(this.errorMessage);
       }

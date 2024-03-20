@@ -1,0 +1,96 @@
+<link rel="stylesheet" href="sign-up.component.css">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<div class="container" *ngIf="!isSuccessful">
+
+  <div class="forms">
+    <div class="form signup">
+      <div>
+        <span class="title">Registration</span>
+      </div>
+
+      <form action="#"
+            name="form"
+            #f="ngForm"
+            (ngSubmit)="f.valid && onSubmit()"
+            novalidate>
+
+        <div class="input-field">
+          <input type="text" placeholder="Enter your email" required email
+                 name="email" [(ngModel)]="user.email" #email="ngModel">
+          <i class="uil uil-envelope icon"></i>
+        </div>
+        <div class="text-danger" *ngIf="email.errors && f.submitted">
+          <div *ngIf="email.errors['required']"><small>Email is required</small></div>
+          <div *ngIf="email.errors['email']"><small>Please provide a valid email</small></div>
+        </div>
+        <div class="input-field">
+          <input type="password" class="password" placeholder="Create a password" required maxlength="120"
+                 name="password" [(ngModel)]="user.password" #password="ngModel">
+          <i class="uil uil-lock icon"></i>
+        </div>
+        <div class="text-danger" *ngIf="password.errors && f.submitted">
+          <div *ngIf="password.errors['required']"><small>Password is required</small></div>
+          <div *ngIf="password.errors['maxlength']"><small>Password may contain a maximum of 120 characters</small></div>
+        </div>
+        <!--<div class="text-danger" *ngIf="isRegexPattern">
+          <div><small>Password must have at least 8 characters and contain at least one letter and one digit</small></div>
+        </div>-->
+
+        <!-- <div class="checkbox-text">
+            <div class="checkbox-content">
+                <input type="checkbox" id="termCon"
+                required
+                lass="form-control"
+                name="acceptTerms"
+                [(ngModel)]="user.acceptTerms"
+                #acceptTerms="ngModel"
+                >
+                <label for="acceptTerms" class="form-check-label">I have read and agree to the <a href="">terms</a></label>
+            </div>
+        </div>
+        <div *ngIf="f.submitted && acceptTerms.errors" class="text-danger">
+          <small>Accept Terms is required</small>
+        </div> -->
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+      </form>
+
+      <div class="my-alert-2 my-danger" *ngIf="f.submitted && isSignUpFailed" style="margin-top: 10px;">
+        <div class="icon">
+          <i class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="content">
+          <h4>Oops, something went wrong!</h4>
+          <p>{{ errorMessage }}</p>
+        </div>
+      </div>
+
+      <div class="login-signup">
+        <span class="text">
+          Already a member?
+          <a href="/login" class="text login-link">Login Now</a>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popup" id="success" *ngIf="isSuccessful">
+  <div class="popup-content">
+    <!-- <div class="imgbox">
+      <img src="../../../assets/images/checked.png" alt="" class="img">
+    </div> -->
+    <div class="title">
+      <h3>Confirm your email address</h3>
+    </div>
+    <p class="para">We have sent an email with a confirmation link to your email address. In order to complete the sign-up process, please click the confirmation link.</p>
+    <form action="">
+      <!-- <a href="#" class="button-okay" id="s_button">OKAY</a> -->
+      <!-- <p class="para_2">You will be redirected to the login page</p> -->
+    </form>
+  </div>
+</div>

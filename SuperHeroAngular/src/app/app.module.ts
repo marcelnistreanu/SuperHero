@@ -18,6 +18,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SuperHeroService } from './services/super-hero.service';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { SuperHeroService } from './services/super-hero.service';
     EditHeroComponent,
     HeaderComponent,
     LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,

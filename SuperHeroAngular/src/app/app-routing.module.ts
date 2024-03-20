@@ -4,6 +4,7 @@ import { CreateHeroComponent } from './pages/create-hero/create-hero.component';
 import { HomeComponent } from './pages/home/home.component';
 import { EditHeroComponent } from './pages/edit-hero/edit-hero.component';
 import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -11,6 +12,7 @@ const routes: Routes = [
   { path: 'create-hero', component: CreateHeroComponent },
   { path: 'edit-hero', component: EditHeroComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: "**", redirectTo: '/home' }  
 ];
 

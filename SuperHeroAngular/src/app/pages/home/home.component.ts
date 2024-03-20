@@ -10,40 +10,36 @@ import { SuperHeroService } from '../../services/super-hero.service';
 export class HomeComponent implements OnInit {
 
   superheroes: SuperHero[] = [];
-  hero: SuperHero;
-    //= new SuperHero(10, "Super", "Vas", "AS", "asd");
+  hero: SuperHero = new SuperHero(10, "Super", "Vas", "AS", "asd");
 
   constructor(private superHeroesService: SuperHeroService) { }
 
-  ngOnInit(): void {
-    this.getSuperHeroes();
+  async ngOnInit(): Promise<void> {
+    await this.getSuperHeroes();
   }
 
-  getSuperHeroes(): void {
-    console.log("Sending HTTP request to get superheroes");
-    this.superHeroesService.getSuperHeroes().subscribe((response: any) => {
-      if (response && response.value) {
-        this.superheroes = response.value;
-        //this.hero = this.superheroes[0];
-        console.log("Lista:", this.superheroes);
-        console.log(this.hero);
-      } else {
-        console.error("Invalid response format:", response);
-      }
-    });
-  }
+  //getSuperHeroes(): void {
+  //  console.log("Sending HTTP request to get superheroes");
+  //  this.superHeroesService.getSuperHeroes().subscribe((response: any) => {
+  //    if (response && response.value) {
+  //      this.superheroes = response.value;
+  //      //this.hero = this.superheroes[0];
+  //      console.log("Lista:", this.superheroes);
+  //      console.log("Superhero created locally: ", this.hero);
+  //    } else {
+  //      console.error("Invalid response format:", response);
+  //    }
+  //  });
+  //}
 
-  getHeroesNew(): void {
+  async getSuperHeroes(): Promise<void> {
     console.log("Sending HTTP request to get superheroes");
-    this.superHeroesService.getHeroesNew().subscribe(
-      (data: SuperHero[]) => {
-        this.superheroes = data;
-        console.log(this.superheroes);
-      },
-      (error) => {
-        console.error('Error fetching superheroes:', error);
-      }
-    );
+    try {
+      this.superheroes = await this.superHeroesService.getSuperHeroes();
+      console.log("Lista:", this.superheroes);
+    } catch (error) {
+      console.error("Error fetching superheroes:", error);
+    }
   }
 
 
@@ -56,10 +52,6 @@ export class HomeComponent implements OnInit {
         console.error("Invalid response format:", response);
       }
     })
-  }
-
-  selectHero(heroName: string): void {
-    console.log(heroName);
   }
 
 }

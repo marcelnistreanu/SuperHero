@@ -9,7 +9,7 @@ import { SuperHeroService } from '../../services/super-hero.service';
 })
 export class CreateHeroComponent {
 
-  superHero: SuperHero = new SuperHero();
+  superHero: SuperHero = new SuperHero(1, "", "", "", "");
 
   isSuccessful = false;
   errorMessage = '';

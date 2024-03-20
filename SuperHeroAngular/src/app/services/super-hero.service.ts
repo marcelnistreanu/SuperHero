@@ -12,12 +12,21 @@ export class SuperHeroService {
 
   constructor(private http: HttpClient) { }
 
-  getSuperHeroes(): Observable<SuperHero[]> {
-    return this.http.get<SuperHero[]>(this.apiUrl);
-  }
+  //getSuperHeroes(): Observable<SuperHero[]> {
+  //  return this.http.get<SuperHero[]>(this.apiUrl);
+  //}
 
-  getHeroesNew(): Observable<SuperHero[]> {
-    return this.http.get<SuperHero[]>(`${this.apiUrl}/getHeroesNew`);
+  async getSuperHeroes(): Promise<SuperHero[]> {
+    try {
+      const response = await this.http.get<any>(this.apiUrl).toPromise();
+      if (response && response.isSuccess && response.value) {
+        return response.value as SuperHero[];
+      } else {
+        return [];
+      }
+    } catch (error) {
+      throw 'Error fetching superheroes: ' + error;
+    }
   }
 
   createSuperHero(hero: SuperHero): Observable<any> {

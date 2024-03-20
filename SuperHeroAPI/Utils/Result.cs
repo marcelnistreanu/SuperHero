@@ -29,7 +29,7 @@ public class Result
     public static Result<T> Failure<T>(Error error)
     {
         return new Result<T>(default, false, error);
-    }
+    }    
 
     public static Result<T> Ok<T>(T value)
     {

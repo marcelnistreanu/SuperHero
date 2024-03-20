@@ -1,4 +1,4 @@
-<div class="container" *ngIf="isSuccess">
+<div class="container" *ngIf="!isSuccess">
   <div class="forms">
     <div class="form login">
       <span class="title">Login</span>
@@ -7,8 +7,8 @@
       </div>
       <form #addForm="ngForm" (ngSubmit)="onSubmit()">
         <div class="input-field">
-          <input type="text" ngModel [(ngModel)]="username" name="username" placeholder="Enter your username" required>
-          <i class="uil uil-user"></i>
+          <input type="text" ngModel [(ngModel)]="email" name="email" placeholder="Enter your email" required>
+          <i class="uil uil-envelope icon"></i>
         </div>
         <div class="input-field">
           <input type="password" ngModel [(ngModel)]="password" name="password" class="password" placeholder="Enter your password" required>
@@ -39,15 +39,18 @@
   </div>
 
 </div>
-<div class="popup" id="success" *ngIf="!isSuccess">
+<div class="popup" id="success" *ngIf="isSuccess">
   <div class="popup-content">
-    <!-- <div class="imgbox">
-      <img src="../../../assets/images/checked.png" alt="" class="img">
-    </div> -->
     <div class="title">
-      <h3>Your confirmation link was resent</h3>
+      <h3>Login successful</h3>
     </div>
-    <p class="para">We have sent an email with a confirmation link to your email address. In order to complete the sign-up process, please click the confirmation link.</p>
+    <div class="imgbox">
+      <img src="../../../assets/images/checked.png" alt="" class="img">
+    </div>
+    <!--<div class="title">
+    <h3>Your confirmation link was resent</h3>
+  </div>-->
+    <!-- <p class="para">We have sent an email with a confirmation link to your email address. In order to complete the sign-up process, please click the confirmation link.</p>-->
     <form action="">
       <!-- <a href="#" class="button-okay" id="s_button">OKAY</a> -->
       <!-- <p class="para_2">You will be redirected to the login page</p> -->

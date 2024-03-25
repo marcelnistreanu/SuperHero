@@ -1,30 +1,36 @@
-<div *ngIf="superheroes && superheroes.length > 0; else noHeroes">
+<!-- <div *ngIf="this.superheroes && this.superheroes.length > 0; else noHeroes"> -->
   <h2>List of Superheroes</h2>
+  <div>
+    Showing {{this.superheroes.length}} superheroes.
+  </div>
   <ul>
-    <div class="d-flex" *ngFor="let hero of superheroes">
-    <li>
-      {{ hero.Name }}
-    </li>
-    <button mat-fab color="primary" matTooltip="Edit" class="custom-button">
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button (click)="deleteHero(hero.Id)" mat-fab color="warn" matTooltip="Delete" class="custom-button">
-      <mat-icon>delete</mat-icon>
-    </button>
-</div>
-  </ul>
-</div>
+    @for (hero of this.superheroes; track $index) {
+      <li>
+        {{this.showHero(hero)}}
+        <button mat-fab color="primary" matTooltip="Edit" class="custom-button">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button (click)="deleteHero(hero.id)" mat-fab color="warn" matTooltip="Delete" class="custom-button">
+          <mat-icon>delete</mat-icon>
+        </button>
+        </li>
+    }
 
-<ng-template #noHeroes>
+  </ul>
+<!-- </div> -->
+
+<!-- <ng-template #noHeroes>
   <div>
     No superheroes available.
   </div>
-</ng-template>
+</ng-template> -->
 
-<div *ngIf="hero">
-  <p>{{ hero.Name }}</p>
-  <p>{{ hero.FirstName }}</p>
-  <p>{{ hero.LastName }}</p>
-  <p>{{ hero.Place }}</p>
+<div *ngIf="this.editHero">
+  <p>{{ editHero.name }}</p>
+  <p>{{ editHero.FirstName }}</p>
+  <p>{{ editHero.LastName }}</p>
+  <p>{{ editHero.Place }}</p>
 </div>
 
+<button type="button" (click)="this.resetHeroesToRandom()">Set Random Hero Data</button>
+<button type="button" (click)="this.rereadHeroes()">Re-Read Heroes</button>

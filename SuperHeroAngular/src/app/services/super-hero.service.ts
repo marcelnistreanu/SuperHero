@@ -17,11 +17,14 @@ export class SuperHeroService {
   //}
 
   async getSuperHeroes(): Promise<SuperHero[]> {
+    console.log("*** getting superheroes");
     try {
       const response = await this.http.get<any>(this.apiUrl).toPromise();
       if (response && response.isSuccess && response.value) {
+        console.log("*** 0", response);
         return response.value as SuperHero[];
       } else {
+        console.log("*** 1", response);
         return [];
       }
     } catch (error) {

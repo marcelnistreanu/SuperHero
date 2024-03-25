@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { SuperHero } from '../../models/SuperHero';
 import { SuperHeroService } from '../../services/super-hero.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class HomeComponent implements OnInit {
 
   superheroes: SuperHero[] = [];
-  hero: SuperHero = new SuperHero(10, "Super", "Vas", "AS", "asd");
+  editHero: SuperHero = new SuperHero(10, "Super", "Vas", "AS", "asd");
 
   constructor(private superHeroesService: SuperHeroService) { }
 
@@ -18,30 +19,25 @@ export class HomeComponent implements OnInit {
     await this.getSuperHeroes();
   }
 
-  //getSuperHeroes(): void {
-  //  console.log("Sending HTTP request to get superheroes");
-  //  this.superHeroesService.getSuperHeroes().subscribe((response: any) => {
-  //    if (response && response.value) {
-  //      this.superheroes = response.value;
-  //      //this.hero = this.superheroes[0];
-  //      console.log("Lista:", this.superheroes);
-  //      console.log("Superhero created locally: ", this.hero);
-  //    } else {
-  //      console.error("Invalid response format:", response);
-  //    }
-  //  });
-  //}
-
   async getSuperHeroes(): Promise<void> {
     console.log("Sending HTTP request to get superheroes");
     try {
+
+      let response = await this.superHeroesService.getSuperHeroes();
+      console.log("Response:", response);
+
+      response.forEach(element => {
+        console.log("*** item ***", element);
+      });
       this.superheroes = await this.superHeroesService.getSuperHeroes();
       console.log("Lista:", this.superheroes);
+
+      //
+
     } catch (error) {
       console.error("Error fetching superheroes:", error);
     }
   }
-
 
   deleteHero(heroId: number): void {
     console.log("Sending HTTP request to delete superhero");
@@ -52,6 +48,22 @@ export class HomeComponent implements OnInit {
         console.error("Invalid response format:", response);
       }
     })
+  }
+
+  showHero(hero: SuperHero): string {
+    return `Name: ${hero.name}, Place: ${hero.Place}`;
+  }
+
+
+  public resetHeroesToRandom(): void {
+    this.superheroes = [];
+    for (let i = 0; i < 10; i++) {
+      this.superheroes.push(new SuperHero(i, "Super" + i, "Vas" + i, "AS" + i, "asd" + i));
+    }
+  }
+
+  public rereadHeroes(): void {
+    this.getSuperHeroes();
   }
 
 }

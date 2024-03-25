@@ -1,13 +1,13 @@
 export class SuperHero {
-  Id: number;
-  Name: string;
+  id: number;
+  name: string;
   FirstName: string;
   LastName: string;
   Place: string;
 
   constructor(id: number, name: string, firstName: string, lastName: string, place: string) {
-    this.Id = id;
-    this.Name = name;
+    this.id = id;
+    this.name = name;
     this.FirstName = firstName;
     this.LastName = lastName;
     this.Place = place;
